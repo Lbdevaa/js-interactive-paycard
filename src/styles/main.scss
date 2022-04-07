@@ -1,0 +1,23 @@
+// CSS-файлы библиотек
+@import "vendor/libs";
+
+// Переменные, миксины, функции
+@import "helpers/variables";
+@import "helpers/functions";
+
+// Основное
+@import "fonts";
+@import "settings";
+@import "global";
+
+// БЭМ-блоки
+@import "../blocks/modules";
+
+// Переиспользумые блоки
+@import "blocks/footer";
+@import "blocks/header";
+@import "blocks/card-form";
+
+// Cтраницы 
+@import "pages/index"; 
+@import "pages/404"; 
