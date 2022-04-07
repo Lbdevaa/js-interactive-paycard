@@ -22,8 +22,7 @@ function makeCode() {
 
     document.querySelector('#code').appendChild(codeBlock);
   }
-  const cardNum = document.querySelector('#cardnum')
-  const cardNumMaxLength = cardNum.maxLength
+
 }
 
 const regex = /\D/g;
@@ -31,6 +30,13 @@ const regex = /\D/g;
 // TODO: сделать на любой изменение содержимого cardNum
 
 function changeCode() {
+  const cardNum = document.querySelector('#cardnum')
+  const cardNumMaxLength = cardNum.maxLength
+
+  cardNum.addEventListener('keydown', (event) => {
+    console.log(event.target.value);
+  });
+
   document.querySelector('#cardnum').addEventListener('keydown', (e) => {
     setTimeout(() => {
       document.querySelector('#cardnum').value = document.querySelector('#cardnum').value.replaceAll(regex, '');
@@ -62,8 +68,8 @@ function changeCode() {
 
         for (let i = Math.min(document.querySelector('#cardnum').value.length, 15); i > e.target.selectionStart - 1 && i < 16; i--) {
           hashes[i].innerHTML = hashes[i - 1].innerHTML;
-          console.log(hashes[i]);
-          console.log('3', hashes[i] - 1);
+          // console.log(hashes[i]);
+          // console.log('3', hashes[i] - 1);
         }
 
         hashes[e.target.selectionStart - 1].preventDefault;
