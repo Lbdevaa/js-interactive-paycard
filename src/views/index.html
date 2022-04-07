@@ -29,7 +29,7 @@
                 <span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span>
                 <span><div class="card-item__numberItem">#</div></span>
               </label>
-              <div id="code"></div>
+              <div id="code" class="card-item__number"></div>
             </div>
 
           </div>
@@ -44,7 +44,8 @@
         </div>
         <div class="card-input">
           <label for="cardnum" class="card-input__label">Номер карты</label>
-          <input type="number" id="cardnum" maxlength="19" data-card-field="" autocomplete="off" class="card-input__input" />
+          <input type="tel" id="cardnum" name="cardnum" value="" maxlength="15" autocomplete="off" class="card-input__input" />
+          <!-- не работает с type="number" -->
         </div>
         <button class="card-form__button">Получить выплату</button>
         <button class="card-form__button--del">Отвязать карту</button>

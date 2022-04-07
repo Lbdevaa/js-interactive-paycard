@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", init);
 function init() {
   makeCode();
   changeCode();
-  // moveBrands();
 }
 
 function makeCode() {
@@ -23,10 +22,13 @@ function makeCode() {
 
     document.querySelector('#code').appendChild(codeBlock);
   }
+  const cardNum = document.querySelector('#cardnum')
+  const cardNumMaxLength = cardNum.maxLength
 }
 
-let is_new = true;
 const regex = /\D/g;
+
+// TODO: сделать на любой изменение содержимого cardNum
 
 function changeCode() {
   document.querySelector('#cardnum').addEventListener('keydown', (e) => {
@@ -42,6 +44,7 @@ function changeCode() {
         document.querySelector('#code').innerHTML = '';
         is_new = true;
         makeCode();
+        // 8 - каретка удаления
       } else if (e.keyCode == 8 && e.target.selectionStart != 0) {
         let hashes = document.querySelectorAll('.hash');
 
@@ -58,8 +61,9 @@ function changeCode() {
         let hashes = document.querySelectorAll('.hash');
 
         for (let i = Math.min(document.querySelector('#cardnum').value.length, 15); i > e.target.selectionStart - 1 && i < 16; i--) {
-          console.log(hashes[i - 1]);
           hashes[i].innerHTML = hashes[i - 1].innerHTML;
+          console.log(hashes[i]);
+          console.log('3', hashes[i] - 1);
         }
 
         hashes[e.target.selectionStart - 1].preventDefault;
@@ -74,16 +78,3 @@ function changeCode() {
     }, 10)
   })
 }
-
-// function moveBrands() {
-//   let brands = document.querySelectorAll('#brands img');
-//   for (let i = 0; i < brands.length; i++) {
-//     brands[i].style.animation = `movebrand 3s ease-in-out ${3.2 * i}s 1`;
-//     brands[brands.length - 1].addEventListener("animationend", () => {
-//       brands[i].preventDefault;
-//       brands[i].style.animation = ``;
-//       void brands[i].offsetWidth;
-//       brands[i].style.animation = `movebrand 3s ease-in-out ${3.2 * i}s 1`;
-//     });
-//   }
-// }
