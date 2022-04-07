@@ -4,38 +4,54 @@
   <body>
      
     <div class="card-form">
-      <div class="card-list">
-          <div class="card-item">
-              <div class="card-item__side -front">
-                  <div class="card-item__focus" style=""></div>
-                  <div class="card-item__cover"><img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/4.jpeg" class="card-item__bg" /></div>
-                  <div class="card-item__wrapper">
-                      <div class="card-item__top">
-                          <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" class="card-item__chip" />
-                          <div class="card-item__type"><!----></div>
-                      </div>
-                      <label for="v-card-number" class="card-item__number">
-                          <span><div class="card-item__numberItem">1</div></span><span><div class="card-item__numberItem">2</div></span><span><div class="card-item__numberItem">3</div></span>
-                          <span><div class="card-item__numberItem">1</div></span><span><div class="card-item__numberItem -active"></div></span><span><div class="card-item__numberItem">*</div></span>
-                          <span><div class="card-item__numberItem">*</div></span><span><div class="card-item__numberItem">*</div></span><span><div class="card-item__numberItem">*</div></span>
-                          <span><div class="card-item__numberItem -active"></div></span><span><div class="card-item__numberItem">*</div></span><span><div class="card-item__numberItem">#</div></span>
-                          <span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem -active"></div></span>
-                          <span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span>
-                          <span><div class="card-item__numberItem">#</div></span>
-                      </label>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="card-form__inner">
-          <div class="freelancer-switch"><input type="checkbox" id="checkbox" class="freelancer-switch__checkbox" /><label for="checkbox" class="freelancer-switch__label">Я фрилансер</label></div>
-          <div class="card-input"><label for="cardNumber" class="card-input__label">Номер карты</label><input type="tel" id="v-card-number" maxlength="19" data-card-field="" autocomplete="off" class="card-input__input" /></div>
-          <button class="card-form__button">Получить выплату</button><button class="card-form__button--del">Отвязать карту</button>
-      </div>
-  </div>
-  
 
-    <script src="js/vendor.js"></script>
-    <script src="js/main.js"></script>
+      <div class="card-list">
+
+        <div class="card-item">
+
+          <div class="card-item__side -front">
+            <div class="card-item__focus"></div>
+            <div class="card-item__cover">
+              <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/4.jpeg" class="card-item__bg" />
+            </div>
+
+            <div class="card-item__wrapper">
+              <div class="card-item__top">
+                <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" class="card-item__chip" />
+                <div class="card-item__type"><!----></div>
+              </div>
+              <label for="v-card-number" class="card-item__number">
+                <span><div class="card-item__numberItem">1</div></span><span><div class="card-item__numberItem">2</div></span><span><div class="card-item__numberItem">3</div></span>
+                <span><div class="card-item__numberItem">1</div></span><span><div class="card-item__numberItem -active"></div></span><span><div class="card-item__numberItem">*</div></span>
+                <span><div class="card-item__numberItem">*</div></span><span><div class="card-item__numberItem">*</div></span><span><div class="card-item__numberItem">*</div></span>
+                <span><div class="card-item__numberItem -active"></div></span><span><div class="card-item__numberItem">*</div></span><span><div class="card-item__numberItem">#</div></span>
+                <span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem -active"></div></span>
+                <span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span><span><div class="card-item__numberItem">#</div></span>
+                <span><div class="card-item__numberItem">#</div></span>
+              </label>
+              <div id="code"></div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-form__inner">
+        <div class="freelancer-switch">
+          <input type="checkbox" id="checkbox" class="freelancer-switch__checkbox" />
+          <label for="checkbox" class="freelancer-switch__label">Я фрилансер</label>
+        </div>
+        <div class="card-input">
+          <label for="cardnum" class="card-input__label">Номер карты</label>
+          <input type="number" id="cardnum" maxlength="19" data-card-field="" autocomplete="off" class="card-input__input" />
+        </div>
+        <button class="card-form__button">Получить выплату</button>
+        <button class="card-form__button--del">Отвязать карту</button>
+      </div>
+
+    </div>
+
+    <script src="js/main.min.js"></script>
   </body>
 </html>
