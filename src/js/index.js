@@ -5,10 +5,12 @@ document.addEventListener("DOMContentLoaded", init);
 
 function init() {
   makeCode();
-  changeCode();
 }
 
 function makeCode() {
+  const cardNum = document.querySelector('#cardnum')
+  const cardNumMaxLength = cardNum.maxLength
+
   for (let i = 0; i < 4; i++) {
     let codeBlock = document.createElement('div');
     codeBlock.classList.add('code-block');
@@ -23,19 +25,21 @@ function makeCode() {
     document.querySelector('#code').appendChild(codeBlock);
   }
 
+  // cardNum.addEventListener('keyup', changeCode);
+  // cardNum.addEventListener('input', changeCode);
 }
 
 const regex = /\D/g;
 
 // TODO: сделать на любой изменение содержимого cardNum
 
-function changeCode() {
-  const cardNum = document.querySelector('#cardnum')
-  const cardNumMaxLength = cardNum.maxLength
+function changeCode(event) {
+  // let input = event.target
+  let inputValue = event.target.value
+  let hashes = document.querySelectorAll('.hash');
+}
 
-  cardNum.addEventListener('keydown', (event) => {
-    console.log(event.target.value);
-  });
+function changeCode1() {
 
   document.querySelector('#cardnum').addEventListener('keydown', (e) => {
     setTimeout(() => {
@@ -84,3 +88,54 @@ function changeCode() {
     }, 10)
   })
 }
+
+let numberInput = document.querySelector('#cardnum'),
+  numberPattern = /^\d{0,16}$/g,
+  numberSeparator = " ",
+  numberInputOldValue,
+  numberInputOldCursor,
+
+  mask = (value, limit, separator) => {
+    var output = [];
+    for (let i = 0; i < value.length; i++) {
+      if (i !== 0 && i % limit === 0) {
+        output.push(separator);
+      }
+
+      output.push(value[i]);
+    }
+
+    return output.join("");
+  },
+  unmask = (value) => value.replace(/[^\d]/g, ''),
+  checkSeparator = (position, interval) => Math.floor(position / (interval + 1)),
+  numberInputKeyDownHandler = (e) => {
+    let el = e.target;
+    numberInputOldValue = el.value;
+    numberInputOldCursor = el.selectionEnd;
+  },
+  numberInputInputHandler = (e) => {
+    let el = e.target,
+      newValue = unmask(el.value),
+      newCursorPosition;
+
+    if (newValue.match(numberPattern)) {
+      newValue = mask(newValue, 4, numberSeparator);
+
+      newCursorPosition =
+        numberInputOldCursor - checkSeparator(numberInputOldCursor, 4) +
+        checkSeparator(numberInputOldCursor + (newValue.length - numberInputOldValue.length), 4) +
+        (unmask(newValue).length - unmask(numberInputOldValue).length);
+
+      el.value = (newValue !== "") ? newValue : "";
+    } else {
+      el.value = numberInputOldValue;
+      newCursorPosition = numberInputOldCursor;
+    }
+
+    el.setSelectionRange(newCursorPosition, newCursorPosition);
+
+  };
+
+numberInput.addEventListener('keydown', numberInputKeyDownHandler);
+numberInput.addEventListener('input', numberInputInputHandler);
