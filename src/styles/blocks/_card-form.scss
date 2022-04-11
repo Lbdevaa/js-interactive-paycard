@@ -362,9 +362,11 @@ input[type=number] {
     position: relative;
     display: flex;
     justify-content: flex-end;
-    max-width: 100px;
-    margin-left: auto;
+    max-width: 60px;
     width: 100%;
+    margin-left: auto;
+    background: #ffffff40;
+    border-radius: 5px;
 
     @media screen and (max-width: 480px) {
       height: 40px;
@@ -376,11 +378,23 @@ input[type=number] {
     }
   }
 
-  &__typeImg {
-    max-width: 100%;
+  &__type-img {
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
-    max-height: 100%;
     object-position: top right;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    opacity: 0;
+    transition: .25s ease;
+
+    &.active {
+      opacity: 1;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &__info {

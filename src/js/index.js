@@ -8,9 +8,6 @@ function init() {
 }
 
 function makeCode() {
-  const cardNum = document.querySelector('#cardnum')
-  const cardNumMaxLength = cardNum.maxLength
-
   for (let i = 0; i < 4; i++) {
     let codeBlock = document.createElement('div');
     codeBlock.classList.add('code-block');
@@ -31,6 +28,30 @@ let numberInput = document.querySelector('#cardnum'),
   numberSeparator = " ",
   numberInputOldValue,
   numberInputOldCursor,
+
+  highlightType = (value) => {
+    let innerCardType = '',
+      CardTypePatterns = {
+        amex: /^3/,
+        visa: /^4/,
+        mastercard: /^5/,
+        unionpay: /^62/,
+        genric: /(^1|^2|^7|^8|^9|^0)/,
+      };
+
+    for (const cardType in CardTypePatterns) {
+      if (CardTypePatterns[cardType].test(value)) {
+        innerCardType = cardType;
+        console.log(innerCardType);
+        break;
+      }
+    }
+    let activeCC = document.querySelector('.card-item__type-img.active'),
+      newActiveCC = document.querySelector(`.card-item__type-img--${innerCardType}`);
+
+    if (activeCC) activeCC.classList.remove('active');
+    if (newActiveCC) newActiveCC.classList.add('active');
+  },
 
   mask = (value, limit, separator) => {
     var output = [];
@@ -95,6 +116,7 @@ let numberInput = document.querySelector('#cardnum'),
       }
     }, 5)
     numberInputOldCursor = el.selectionEnd;
+    highlightType(el.value);
   },
   numberInputPastHandler = (e) => {
     let el = e.target,
@@ -123,6 +145,7 @@ let numberInput = document.querySelector('#cardnum'),
     }
 
     el.setSelectionRange(newCursorPosition, newCursorPosition);
+    highlightType(el.value);
 
   };
 
