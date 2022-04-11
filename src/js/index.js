@@ -99,8 +99,14 @@ let numberInput = document.querySelector('#cardnum'),
   numberInputPastHandler = (e) => {
     let el = e.target,
       newValue = unmask(el.value),
-      newCursorPosition;
-    console.log(newValue);
+      newCursorPosition,
+      hashes = document.querySelectorAll('.hash');
+
+    for (let i = 0; i < newValue.split('').length; i++) {
+      hashes[i].classList.remove('run-animation');
+      hashes[i].classList.add('run-animation');
+      hashes[i].innerHTML = newValue[i]
+    }
 
     if (newValue.match(numberPattern)) {
       newValue = mask(newValue, 4, numberSeparator);
