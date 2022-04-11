@@ -70,11 +70,19 @@ input[type=number] {
 
   &__row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
 
     @media screen and (max-width: 480px) {
       flex-wrap: wrap;
     }
+  }
+
+  &__text {
+    flex: 1;
+    line-height: 1.4;
   }
 
   &__col {
@@ -167,6 +175,12 @@ input[type=number] {
       margin-top: 10px;
     }
   }
+
+  &__footer {
+    padding: 0 35px;
+    line-height: 1.4;
+    margin: 20px auto;
+  }
 }
 
 .freelancer-switch {
@@ -185,7 +199,6 @@ input[type=number] {
     padding: 5px 10px;
     background: white;
     border-radius: 5px;
-    margin-bottom: 20px;
     font-family: "Source Sans Pro", sans-serif;
     display: inline-block;
     color: #1a3b5d;
