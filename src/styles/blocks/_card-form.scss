@@ -816,6 +816,13 @@ input[type=number] {
   }
 }
 
+.hash {
+  position: relative;
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: 5px;
+}
+
 .run-animation {
   animation: digit 0.2s ease-in-out 0s 1;
   animation-fill-mode: forwards;

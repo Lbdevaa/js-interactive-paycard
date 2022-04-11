@@ -24,69 +24,6 @@ function makeCode() {
 
     document.querySelector('#code').appendChild(codeBlock);
   }
-
-  // cardNum.addEventListener('keyup', changeCode);
-  // cardNum.addEventListener('input', changeCode);
-}
-
-const regex = /\D/g;
-
-// TODO: сделать на любой изменение содержимого cardNum
-
-function changeCode(event) {
-  // let input = event.target
-  let inputValue = event.target.value
-  let hashes = document.querySelectorAll('.hash');
-}
-
-function changeCode1() {
-
-  document.querySelector('#cardnum').addEventListener('keydown', (e) => {
-    setTimeout(() => {
-      document.querySelector('#cardnum').value = document.querySelector('#cardnum').value.replaceAll(regex, '');
-      if (document.querySelector('#cardnum').value.length > 16) {
-        let num = e.target.selectionStart;
-        document.querySelector('#cardnum').value = document.querySelector('#cardnum').value.substring(0, 16);
-        e.target.selectionStart = num;
-        e.target.selectionEnd = num;
-      }
-      if (document.querySelector('#cardnum').value.length === 0) {
-        document.querySelector('#code').innerHTML = '';
-        is_new = true;
-        makeCode();
-        // 8 - каретка удаления
-      } else if (e.keyCode == 8 && e.target.selectionStart != 0) {
-        let hashes = document.querySelectorAll('.hash');
-
-        for (let i = e.target.selectionStart; i < document.querySelector('#cardnum').value.length; i++) {
-          hashes[i].innerHTML = hashes[i + 1].innerHTML;
-        }
-
-        hashes[document.querySelector('#cardnum').value.length].preventDefault;
-        hashes[document.querySelector('#cardnum').value.length].classList.remove('run-animation');
-        void hashes[document.querySelector('#cardnum').value.length].offsetWidth;
-        hashes[document.querySelector('#cardnum').value.length].classList.add('run-animation');
-        hashes[document.querySelector('#cardnum').value.length].innerHTML = '#';
-      } else if (e.keyCode >= 48 && e.keyCode <= 57) {
-        let hashes = document.querySelectorAll('.hash');
-
-        for (let i = Math.min(document.querySelector('#cardnum').value.length, 15); i > e.target.selectionStart - 1 && i < 16; i--) {
-          hashes[i].innerHTML = hashes[i - 1].innerHTML;
-          // console.log(hashes[i]);
-          // console.log('3', hashes[i] - 1);
-        }
-
-        hashes[e.target.selectionStart - 1].preventDefault;
-        hashes[e.target.selectionStart - 1].classList.remove('run-animation');
-        void hashes[e.target.selectionStart - 1].offsetWidth;
-        if (e.target.selectionStart - 1 < 15 || hashes[e.target.selectionStart - 1].innerHTML == '#') {
-          hashes[e.target.selectionStart - 1].classList.add('run-animation');
-        }
-        hashes[e.target.selectionStart - 1].innerHTML = document.querySelector('#cardnum').value[e.target.selectionStart - 1];
-      }
-
-    }, 10)
-  })
 }
 
 let numberInput = document.querySelector('#cardnum'),
@@ -111,13 +48,59 @@ let numberInput = document.querySelector('#cardnum'),
   checkSeparator = (position, interval) => Math.floor(position / (interval + 1)),
   numberInputKeyDownHandler = (e) => {
     let el = e.target;
+    // e.target -> input
     numberInputOldValue = el.value;
+    setTimeout(() => {
+      let stepCodeBlock;
+
+      switch (true) {
+        case (el.selectionStart <= 4):
+          stepCodeBlock = 1
+          break;
+        case (el.selectionStart > 4 && el.selectionStart <= 9):
+          stepCodeBlock = 2
+          break;
+        case (el.selectionStart > 9 && el.selectionStart <= 14):
+          stepCodeBlock = 3
+          break;
+        case (el.selectionStart > 14 && el.selectionStart <= 19):
+          stepCodeBlock = 4
+          break;
+        default:
+          stepCodeBlock = 1
+      }
+
+      if (numberInput.value.length === 0) {
+        document.querySelector('#code').innerHTML = '';
+        makeCode();
+      }
+      // 8 - каретка удаления
+      else if (e.keyCode == 8 && el.selectionStart != 0) {
+        let hashes = document.querySelectorAll('.hash');
+
+        for (let i = el.selectionStart; i < numberInput.value.length; i++) {
+          hashes[i].innerHTML = hashes[i + 1].innerHTML;
+        }
+
+        hashes[numberInput.value.length - stepCodeBlock + 1].preventDefault;
+        hashes[numberInput.value.length - stepCodeBlock + 1].classList.remove('run-animation');
+        void hashes[numberInput.value.length - stepCodeBlock + 1].offsetWidth;
+        hashes[numberInput.value.length - stepCodeBlock + 1].classList.add('run-animation');
+        hashes[numberInput.value.length - stepCodeBlock + 1].innerHTML = '#';
+
+      } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+        let hashes = document.querySelectorAll('.hash');
+        hashes[el.selectionStart - stepCodeBlock].innerHTML = unmask(el.value)[el.selectionStart - stepCodeBlock];
+        hashes[el.selectionStart - stepCodeBlock].classList.add('run-animation');
+      }
+    }, 5)
     numberInputOldCursor = el.selectionEnd;
   },
-  numberInputInputHandler = (e) => {
+  numberInputPastHandler = (e) => {
     let el = e.target,
       newValue = unmask(el.value),
       newCursorPosition;
+    console.log(newValue);
 
     if (newValue.match(numberPattern)) {
       newValue = mask(newValue, 4, numberSeparator);
@@ -138,4 +121,4 @@ let numberInput = document.querySelector('#cardnum'),
   };
 
 numberInput.addEventListener('keydown', numberInputKeyDownHandler);
-numberInput.addEventListener('input', numberInputInputHandler);
+numberInput.addEventListener('input', numberInputPastHandler);
