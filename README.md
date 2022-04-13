@@ -3,6 +3,7 @@
 some minor changes on vanila js card number.
 
 https://github.com/Merakaa/js-interactive-paycard/raw/main/demo.gif
+![](demo.gif)
 
 ## :hammer_and_wrench: 
 *[NodeJS](https://nodejs.org/en/)
