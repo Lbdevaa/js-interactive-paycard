@@ -2,10 +2,7 @@
 [vue-interactive-paycard](https://github.com/muhammederdem/vue-interactive-paycard)
 some minor changes on vanila js card number.
 
-https://github.com/Merakaa/js-interactive-paycard/raw/main/demo.gif
-![](demo.gif)
 [](demo.gif)
-(demo.gif)
 ## :hammer_and_wrench: 
 *[NodeJS](https://nodejs.org/en/)
     * [Yarn](https://yarnpkg.com/getting-started): ```0. npm i -g yarn```
